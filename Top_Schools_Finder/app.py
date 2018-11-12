@@ -19,6 +19,7 @@ app = Flask(__name__)
 #################################################
 
 #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] =  False
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/schools_Austin_region.sqlite"
 db = SQLAlchemy(app)
 
