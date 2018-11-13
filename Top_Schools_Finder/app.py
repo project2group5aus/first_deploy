@@ -147,5 +147,10 @@ def campusdashboard(campus_id):
     """Return the campusdashboard page."""
     return render_template("campusdashboard.html", campus_id=campus_id)
 
+@app.route("/tableaucomparisons")
+def tableaucomparisons():
+    """Return the tableau comparisons page."""
+    return render_template("tableaucomparisons.html")
+
 if __name__ == "__main__":
     app.run()
