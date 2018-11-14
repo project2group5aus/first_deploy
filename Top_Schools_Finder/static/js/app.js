@@ -53,7 +53,7 @@ for (var i = 0; i < tableData.length; i++) {
     console.log('campus_link is: ', campus_link);
     table_html+="<tr>";
     // add table data object and align in center for campus_name
-    table_html+="<td align='center'>"+"<a href="+campus_link+">"+tableData[i].campus_name+"</a>"+"</td>";
+    table_html+="<td align='center'>"+"<a href="+"'"+campus_link+"' target='_blank'>"+tableData[i].campus_name+"</a>"+"</td>";
     // add table data object and align in center for address
     table_html+="<td align='center'>"+tableData[i].address+"</td>";
     // add table data object and align in center for zipcode
