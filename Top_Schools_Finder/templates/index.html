@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>School Scout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+  <!-- added Leaflet links below-->
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+
+  <!-- this is the full path. original code did not include "../" -->
+  <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- nav bar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <!-- this is the burger menu button that populates on small screen
+          note the data-target points to the standard navbarMenu ID below which is activated by JS package-->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <!-- set this brand icon to return home -->
+          <a class="navbar-brand" href="/">School Scout Home</a>
+        </div>
+        <!-- right side of navbar -->
+        <div class="navbar-collapse collapse" id="navbarMenu">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+             <li><a href="tableaucomparisons">School Comparisons</a></li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- start of content -->
+    <!-- took out this styling <div class="hero text-center"> -->
+    <div>
+      <!-- added center-align styling -->
+      <h1 class="intro_text">School Scout</h1>
+      <p class="intro_text">Find the Best School For Your Child in the Austin Area</p>
+      <p class="intro_text">Use the School Search filter to select your Zip code and applicable school levels.</p>
+    </div>
+    <div class="container-fluid">
+      <div class="row margin-top-50">
+        <div class="col-md-3">
+          <aside class="filters">
+            <div class="panel panel-default">
+              <div class="panel-heading">School Search</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <ul class="list-group" id="filters">
+                      <li class="filter list-group-item">
+                        <label for="zip">Select a Zipcode</label>
+						<select id = "zip">
+						</select>
+                        <label for="schooltype">Select School Level</label>
+						<select id = "schooltype">
+						   <option value = "1">Elementary</option>
+						   <option value = "2">Middle</option>
+						   <option value = "3">Both Elem and Middle</option>
+						</select>
+                      </li>
+                    </ul>
+                  </div>
+                  <button id="filter-btn" type="submit" class="btn btn-default">Submit</button>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+        <div class="col-md-9">
+          <!-- added scolling container for table in CSS -->
+          <div id="table-area" class="">
+            <table id="school-table" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="table-head">School Name</th>
+                  <th class="table-head">Address</th>
+                  <th class="table-head">Zipcode</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- leaflet map -->
+          <hr>
+          <div id="map" style="height:500px;">
+          </div> 
+        </div> 
+      </div>
+
+    <!-- closes container div -->
+    </div>
+
+    <footer class="footer">
+      <span class="bottom">School Scout</span>
+    </footer>
+
+  <!-- closes wrapper div -->
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+  <script src="{{ url_for('static', filename='js/data.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+
+  <!-- bootstrap javascript packages that listens to click events for the navbar -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+  <!-- this animates the navbar hamburger menu button -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+  <!-- not sure what this contributes -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script> -->
+
+
+</body>
+
+</html>
