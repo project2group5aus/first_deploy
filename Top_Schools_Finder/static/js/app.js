@@ -1,5 +1,5 @@
-// from data.js
-var tableData = data;
+// from data_latlong.js
+var tableData = data_latlong;
 console.log('tableData is: ', tableData);
 
 function populateZipCodeDropdown(table_d) {
@@ -75,7 +75,6 @@ return document.getElementById("school-table").innerHTML = full_html;
 // call function makeTable to render table on HTML page
 makeTable(tableData);
 
-
 // This is code that will listen for events and search through to find rows that match user input.
 //
 // Select the Filter Table button
@@ -133,9 +132,29 @@ filterTable.on("click", function() {
         var filteredData = filteredData.filter(school => school.middle_school === "Y");
     }
 
-    // Finally, call function makeTable to render the filteredData table on HTML page
-    console.log(filteredData);
+    // call function makeTable to render the filteredData table on page
+    console.log('filteredData is: ', filteredData);
     makeTable(filteredData);
+
+    // want zoom value to be closer than default value when filtering for specific zip code
+    var zoom_filter = 12;
+
+    // we want to center on coordinates of the first location in our filtered table
+    var first_coord = filteredData[0].location;
+    console.log('first_coord is: ', first_coord);
+    // set latitude variable to index 0 of first coordinate
+    var first_coord_lat = first_coord[0];
+    // set longitude variable to index 1 of first coordintate
+    var first_coord_lon = first_coord[1];
+    console.log('first_coord_lat is: ', first_coord_lat);
+    console.log('first_coord_lon is: ', first_coord_lon);
+    // now store variable of the first coordinates that we will center on
+    var center_coords_filter = [first_coord_lat, first_coord_lon];
+    console.log('center_coords_filter is: ', center_coords_filter);
+
+    // Finally, call function to create map
+    // pass in filtered Data, the new closer zoom level and center coordinates of first location in filtered table
+    createMap(filteredData, zoom_filter, center_coords_filter);
 
 });
 
